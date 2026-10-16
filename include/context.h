@@ -2,9 +2,17 @@
 #define CONTEXT_H
 
 typedef struct{
+    float left_padding_proportion;
+    float right_padding_proportion;
+    float top_padding_proportion;   
+    float bottom_padding_proportion; 
+} Canvas;
+
+typedef struct{
     float width;
     float height;
     char *title;
+    Canvas proportions;
 } Context;
 
 #endif

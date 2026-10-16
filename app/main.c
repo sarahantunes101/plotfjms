@@ -1,12 +1,14 @@
-
 #include "raylib.h"
 #include "plane.h"
 #include "data.h"
 #include "plotarea.h"
 #include "stdio.h"
+#include "plotgraphs.h"
+
 int main(void)
 {
-    Context window = {800.0, 800.0, "Teste"};
+    Canvas default_proportions = {0.10f, 0.05f, 0.05f, 0.10f};
+    Context window = {800.0, 800.0, "Teste", default_proportions};
 
     Plane plano = {
         SCATTER,
@@ -21,7 +23,7 @@ int main(void)
 
     int size = sizeof(x) / sizeof(x[0]);
 
-    Data data = {plano, "pontos", x, y, size};
+    Data data = {"pontos", x, y, size};
     PlotArea plot = create_plotarea(&window);
     InitWindow(window.width, window.height, window.title);
     SetTargetFPS(60);
@@ -32,7 +34,7 @@ int main(void)
         ClearBackground(RAYWHITE);
 
         draw_plane(&window, &plano, &plot);
-        draw_data(&data, &plano, &plot);
+        plot_scatter_graph(&data, &plano, &plot, RED);
 
         EndDrawing();
     }
